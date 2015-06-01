@@ -68,7 +68,7 @@ ul {
     background: white;
 }
 
-.delete, .delete1 {
+.delete, .delete1, .plus {
     float: right;
     font-weight: bold;
     background: none;
