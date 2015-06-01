@@ -9,9 +9,22 @@
         <form class="new-task">
             <input type="text" name="text" placeholder="Type to add new tasks" />
         </form>
+        <hr/>
+        <form class="new-list">
+            <input type="text" name="text" placeholder="Type to add new list" />
+        </form>
     </header>
 
-    <ul>
+    <ul class="leftSide">
+        <h2>Lists</h2>
+        {{#each lists}}
+            {{> list}}
+        {{else}}
+            <li >No lists found!</li>
+        {{/each}}
+    </ul>
+    <ul class="rightSide">
+        <h2>Tasks</h2>
         {{#each tasks}}
             {{> task}}
         {{else}}
@@ -26,6 +39,14 @@
         <button class="delete">&times;</button>
 
         <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+
+        <span class="text">{{text}}</span>
+    </li>
+</template>
+
+<template name="list">
+    <li >
+        <button class="delete1">&times;</button>
 
         <span class="text">{{text}}</span>
     </li>
