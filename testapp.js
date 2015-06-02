@@ -41,10 +41,29 @@ if (Meteor.isClient) {
             return false;
         },
         "click .toggle-checked": function () {
-            Tasks.update(this._id, {$set: {checked: ! this.checked}});
+            Tasks.update(this._id, {$set: {checked: !this.checked}});
         },
         "click .delete": function () {
             Tasks.remove(this._id);
+        },
+        "click .plus": function () {
+            var l = Lists.find().fetch();
+            var list = "<b>Move to list:</b><hr/>";
+            $.each(l, function (i, v) {
+                var id = v._id;
+                list += "<li class='move to_" + id + "' id='" + id + "'>" + v.text + "</li>";
+            });
+            list = "<ul>" + list + "</ul>";
+            $('.lists.opn_' + this._id).toggle().html(list);
+        },
+        "click .move": function (e) {
+            /*Tasks.update({
+                    _id: this._id
+                },
+                {
+                    list: e.target.id
+                });
+            */
         }
     });
 }

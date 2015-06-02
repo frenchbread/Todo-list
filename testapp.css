@@ -137,3 +137,16 @@ header .hide-completed {
 .rightSide h2{
      padding: 7px;
  }
+.lists{
+    display:none;
+    position: absolute;
+    padding:5px;
+    border:1px solid #ccc;
+    background: white;
+    left:10%;
+    right:10%;
+    z-index: 1000000;
+}
+#close{
+    cursor: pointer;
+}

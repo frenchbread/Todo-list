@@ -1,5 +1,6 @@
 <head>
     <title>Todo List</title>
+
 </head>
 
 <body>
@@ -39,9 +40,11 @@
         <button class="delete">&times;</button>
 
         <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-        <button class="plus">+</button>
+        <button class="plus opn_{{_id}}" >+</button>
 
         <span class="text">{{text}}</span>
+        <div class="lists opn_{{_id}}">
+        </div>
     </li>
 </template>
 
