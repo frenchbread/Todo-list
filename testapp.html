@@ -16,8 +16,10 @@
         </form>
     </header>
 
+
     <ul class="leftSide">
         <h2>Lists</h2>
+        <li class="openTab" id="allTasks"> <span class="text"> All tasks</span></li>
         {{#each lists}}
             {{> list}}
         {{else}}
@@ -49,7 +51,7 @@
 </template>
 
 <template name="list">
-    <li >
+    <li class="openTab" id="{{_id}}">
         <button class="delete1">&times;</button>
 
         <span class="text">{{text}}</span>

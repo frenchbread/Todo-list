@@ -2,9 +2,16 @@ Tasks = new Mongo.Collection("tasks");
 Lists = new Mongo.Collection("lists");
 
 if (Meteor.isClient) {
+    Session.set("tasks", "");
     Template.body.helpers({
         tasks: function () {
-            return Tasks.find({}, {sort: {createdAt: -1}});
+            var tasks;
+            if (Session.get("tasks") == ""){
+                tasks = Tasks.find({ list: ""});
+            }else{
+                tasks = Session.get("tasks");
+            }
+            return tasks;
         },
         lists: function () {
             return Lists.find({}, {sort: {createdAt: -1}});
@@ -18,6 +25,7 @@ if (Meteor.isClient) {
 
             Tasks.insert({
                 text: text,
+                list: '',
                 createdAt: new Date()
             });
 
@@ -51,19 +59,30 @@ if (Meteor.isClient) {
             var list = "<b>Move to list:</b><hr/>";
             $.each(l, function (i, v) {
                 var id = v._id;
-                list += "<li class='move to_" + id + "' id='" + id + "'>" + v.text + "</li>";
+                list += "<li class='move to_" + id + "' id='" + id + "' val='"+ v.text+"'>" + v.text + "</li>";
             });
             list = "<ul>" + list + "</ul>";
             $('.lists.opn_' + this._id).toggle().html(list);
         },
         "click .move": function (e) {
-            /*Tasks.update({
+            Tasks.update({
                     _id: this._id
                 },
                 {
-                    list: e.target.id
+                    $set:{ list: e.target.id }
                 });
-            */
+        },
+        "click .openTab": function (e) {
+
+            var tasks;
+            if(e.target.id == "allTasks"){
+                tasks = Tasks.find({}, {sort: {createdAt: -1}}).fetch();
+            }else{
+                tasks = Tasks.find({ list: e.target.id}).fetch();
+            }
+
+            Session.set("tasks", tasks);
+
         }
     });
 }
