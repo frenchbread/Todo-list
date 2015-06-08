@@ -11,6 +11,7 @@ if (Meteor.isClient) {
             }else{
                 tasks = Session.get("tasks");
             }
+
             return tasks;
         },
         lists: function () {
@@ -77,8 +78,11 @@ if (Meteor.isClient) {
             var tasks;
             if(e.target.id == "allTasks"){
                 tasks = Tasks.find({}, {sort: {createdAt: -1}}).fetch();
+                $('#pageTitle').html('All tasks');
             }else{
                 tasks = Tasks.find({ list: e.target.id}).fetch();
+                aList = Lists.find({ _id: e.target.id }).fetch();
+                $('#pageTitle').html(aList[0].text + " list");
             }
 
             Session.set("tasks", tasks);

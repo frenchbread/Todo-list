@@ -16,24 +16,32 @@
         </form>
     </header>
 
+    <div id="pageTitle"></div>
 
-    <ul class="leftSide">
-        <h2>Lists</h2>
-        <li class="openTab" id="allTasks"> <span class="text"> All tasks</span></li>
-        {{#each lists}}
-            {{> list}}
-        {{else}}
-            <li >No lists found!</li>
-        {{/each}}
-    </ul>
-    <ul class="rightSide">
-        <h2>Tasks</h2>
-        {{#each tasks}}
-            {{> task}}
-        {{else}}
-            <li >No tasks found!</li>
-        {{/each}}
-    </ul>
+    <div>
+        <ul class="leftSide">
+            <h2>Lists</h2>
+            <li class="openTab" id="allTasks"> <span class="text"> All tasks</span></li>
+            {{#each lists}}
+                {{> list}}
+            {{else}}
+                <li >No lists found!</li>
+            {{/each}}
+        </ul>
+        <ul class="rightSide">
+            <h2>Tasks</h2>
+            {{#each tasks}}
+                {{> task}}
+            {{else}}
+                <li >No tasks found!</li>
+            {{/each}}
+        </ul>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#pageTitle').html('All tasks');
+        });
+    </script>
 </div>
 </body>
 
